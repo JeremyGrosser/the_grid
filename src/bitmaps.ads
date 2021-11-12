@@ -6,8 +6,6 @@
 with Picosystem.Screen; use Picosystem.Screen;
 
 package Bitmaps is
-   subtype Frame is Pixels (1 .. Width * Height);
-
    type Gray is mod 4
       with Size => 2;
 
