@@ -22,12 +22,9 @@ package body Game is
       (Position => (34, 93),
        Bitmap   => Bitmaps.X'Access);
 
-   Box_Color : Color_Id := 2;
-
    Velocity : Coordinate := (3, 5);
 
    procedure VBlank is
-      Pos : Coordinate := Box.Position;
    begin
       --  Clear dirty region
       for Y in Box.Bitmap'Range (1) loop
