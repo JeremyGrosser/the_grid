@@ -25,9 +25,9 @@ SYNACK_MISC_CONTRACTS = "enabled"
 SYNACK_MISC_RUNTIME_CHECKS = "enabled"
 
 USB_EMBEDDED_BUILD_MODE = "optimize"
-USB_EMBEDDED_COMPILE_CHECKS = "enabled"
-USB_EMBEDDED_CONTRACTS = "enabled"
-USB_EMBEDDED_RUNTIME_CHECKS = "enabled"
+USB_EMBEDDED_COMPILE_CHECKS = "disabled"
+USB_EMBEDDED_CONTRACTS = "disabled"
+USB_EMBEDDED_RUNTIME_CHECKS = "disabled"
 
 [[depends-on]]  # Added by alr
 picosystem_bsp = "~0.1.0"  # Added by alr
