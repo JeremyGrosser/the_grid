@@ -4,13 +4,8 @@
 --  SPDX-License-Identifier: BSD-3-Clause
 --
 with Picosystem.Screen; use Picosystem.Screen;
-with System.Storage_Elements; use System.Storage_Elements;
-with System;
 
 package Bitmaps is
-   --  XIP access, cacheable, non-allocating - Check for hit, don’t update cache on miss
-   No_Cache : constant Storage_Offset := 16#0100_0000#;
-
    subtype Frame is Pixels (1 .. Width * Height);
 
    type Gray is mod 4
