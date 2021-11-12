@@ -10,7 +10,7 @@ These are built and managed by Alire.
 ## Resources
 I use GIMP to create 8-bit 8x8 grayscale bitmaps, which are transformed by `res/make_resources.py` into 2-bit ELF objects and statically linked into libresources.a. Those symbols are imported by `src/bitmaps.ads`.
 
-You need a GNAT ARM ELF toolchain in your PATH and the Python Pillow Library (python3-pil) installed to run make_resources.
+You need a `arm-eabi-objcopy` and `arm-eabi-ar` in your PATH and the Python Pillow Library (python3-pil) installed to run make_resources.
 
     cd res
     python3 make_resources.py
