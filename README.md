@@ -10,6 +10,7 @@ You need a GNAT ARM ELF toolchain in your PATH and the Python Pillow Library (py
     cd ..
 
 ## Compile
+Depends on [Alire](https://alire.ada.dev/)
 
     alr build
 
