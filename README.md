@@ -1,5 +1,12 @@
 Work in progress game demo for the [Pimoroni Picosystem](https://shop.pimoroni.com/products/picosystem). Don't expect this to do much right now.
 
+## Dependencies
+These are built and managed by Alire.
+
+- [Board Support Package](https://github.com/JeremyGrosser/picosystem_bsp)
+- [Drivers](https://github.com/JeremyGrosser/rp2040_hal)
+- [Serial console](https://github.com/JeremyGrosser/synack_misc)
+
 ## Resources
 I use GIMP to create 8-bit 8x8 grayscale bitmaps, which are transformed by `res/make_resources.py` into 2-bit ELF objects and statically linked into libresources.a. Those symbols are imported by `src/bitmaps.ads`.
 
