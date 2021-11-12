@@ -73,7 +73,6 @@ begin
 
       if N = 50 then
          Console.Put ("FPS");
-         T := Clock / 1000;
          Elapsed := Elapsed / Time (N);
          FPS := Natural (fdiv (1.0, fdiv (Float (Elapsed), Float (Ticks_Per_Second))));
          Console.Put_Line (FPS'Image);
