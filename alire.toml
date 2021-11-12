@@ -1,0 +1,38 @@
+name = "the_grid"
+description = "Shiny new project"
+version = "0.0.0"
+
+authors = ["Jeremy Grosser"]
+maintainers = ["Jeremy Grosser <jeremy@synack.me>"]
+maintainers-logins = ["JeremyGrosser"]
+
+executables = ["main"]
+
+[gpr-set-externals]
+RP2040_HAL_BUILD_MODE = "optimize"
+RP2040_HAL_COMPILE_CHECKS = "enabled"
+RP2040_HAL_CONTRACTS = "enabled"
+RP2040_HAL_RUNTIME_CHECKS = "enabled"
+
+PICOSYSTEM_BSP_BUILD_MODE = "optimize"
+PICOSYSTEM_BSP_COMPILE_CHECKS = "enabled"
+PICOSYSTEM_BSP_CONTRACTS = "enabled"
+PICOSYSTEM_BSP_RUNTIME_CHECKS = "enabled"
+
+SYNACK_MISC_BUILD_MODE = "optimize"
+SYNACK_MISC_COMPILE_CHECKS = "enabled"
+SYNACK_MISC_CONTRACTS = "enabled"
+SYNACK_MISC_RUNTIME_CHECKS = "enabled"
+
+USB_EMBEDDED_BUILD_MODE = "optimize"
+USB_EMBEDDED_COMPILE_CHECKS = "enabled"
+USB_EMBEDDED_CONTRACTS = "enabled"
+USB_EMBEDDED_RUNTIME_CHECKS = "enabled"
+
+[[depends-on]]  # Added by alr
+picosystem_bsp = "~0.1.0"  # Added by alr
+synack_misc = "0"
+
+[[pins]]
+picosystem_bsp = { url='https://github.com/JeremyGrosser/picosystem_bsp' }
+synack_misc = { url='https://github.com/JeremyGrosser/synack_misc' }

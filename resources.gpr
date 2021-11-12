@@ -1,0 +1,6 @@
+library project Resources is
+   for Library_Name use "resources";
+   for Library_Kind use "static";
+   for Library_Dir use "res";
+   for Externally_Built use "true";
+end Resources;

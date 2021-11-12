@@ -1,0 +1,9 @@
+bin/
+obj/
+lib/
+alire/
+config/
+*.swp
+res/*.o
+res/*.a
+res/*.bin
