@@ -8,8 +8,6 @@ with HAL; use HAL;
 
 package Graphics is
 
-   Max_Colors  : constant := 4;
-
    subtype Row    is Integer range 1 .. Picosystem.Screen.Height;
    subtype Column is Integer range 1 .. Picosystem.Screen.Width;
 
