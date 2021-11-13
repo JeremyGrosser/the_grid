@@ -3,24 +3,13 @@
 --
 --  SPDX-License-Identifier: BSD-3-Clause
 --
-with Picosystem.Screen;
-with Picosystem.Pins;
 with Picosystem.LED;
-with Picosystem;
-
-with Serial_Console;
-with RP.ROM.Floating_Point; use RP.ROM.Floating_Point;
-with RP.Device;
 with RP.Clock;
-with RP.GPIO;
-with HAL; use HAL;
-with Graphics;
 with Game;
-
-with RP.Timer; use RP.Timer;
 
 procedure Main is
    package PS renames Picosystem;
+   use type PS.LED.Brightness;
 begin
    RP.Clock.Initialize (PS.XOSC_Frequency);
    RP.Clock.Enable (RP.Clock.PERI);
