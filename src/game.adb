@@ -44,7 +44,7 @@ package body Game is
          end loop;
       end loop;
 
-      --  Move the box
+      --  Invert velocity if we hit an edge
       if (Box.Position.X + Bitmaps.Width + Velocity.X > Column'Last) or
          (Box.Position.X + Velocity.X < Column'First)
       then
@@ -57,10 +57,11 @@ package body Game is
          Velocity.Y := (-1) * Velocity.Y;
       end if;
 
+      --  Update box position
       Box.Position.X := Box.Position.X + Velocity.X;
       Box.Position.Y := Box.Position.Y + Velocity.Y;
 
-      --  Draw new box
+      --  Copy the bitmap to the plane at the box position
       for Y in Box.Bitmap'Range (1) loop
          for X in Box.Bitmap'Range (2) loop
             Current.Bitmap (Box.Position.Y + Y, Box.Position.X + X) := Color_Id (Box.Bitmap (Y, X));
