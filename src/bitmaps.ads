@@ -14,7 +14,7 @@ package Bitmaps is
    --  actual display color is determined by a lookup from this value into a
    --  Graphics.Color_Palette.
    type Bitmap is array (1 .. Height, 1 .. Width) of Graphics.Color_Value
-      with Component_Size => 2;
+      with Component_Size => Graphics.Color_Value'Size;
 
    X : aliased Bitmap
       with Import, External_Name => "_binary_x_bin_start";
