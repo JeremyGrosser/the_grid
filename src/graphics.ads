@@ -32,8 +32,6 @@ package Graphics is
       (Palette => Grayscale,
        Bitmap  => (others => (others => Color_Id'First)));
 
-   Frame : Frame_Number := 0;
-
    type HBlank_Callback is access procedure
       (Y : Row);
    type VBlank_Callback is access procedure
@@ -46,6 +44,8 @@ package Graphics is
    procedure Update;
 
 private
+
+   Frame : Frame_Number := 0;
 
    function Scanline
       (This : Plane;
