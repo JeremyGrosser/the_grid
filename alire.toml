@@ -34,5 +34,5 @@ picosystem_bsp = "~0.1.0"  # Added by alr
 synack_misc = "0"
 
 [[pins]]
-picosystem_bsp = { path='../picosystem_bsp' }
+picosystem_bsp = { url='https://github.com/JeremyGrosser/picosystem_bsp' }
 synack_misc = { url='https://github.com/JeremyGrosser/synack_misc' }
