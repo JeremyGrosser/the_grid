@@ -13,9 +13,10 @@ package Graphics is
 
    subtype Color is Picosystem.Screen.Color;
 
-   type Color_Id is range 0 .. 3;
-   type Color_Palette is array (Color_Id) of Color;
-   type Color_Map is array (Row, Column) of Color_Id;
+   type Color_Value is mod 4
+      with Size => 2;
+   type Color_Palette is array (Color_Value) of Color;
+   type Color_Map is array (Row, Column) of Color_Value;
 
    type Plane is record
       Palette : Color_Palette;
@@ -30,7 +31,7 @@ package Graphics is
 
    Current : Plane :=
       (Palette => Grayscale,
-       Bitmap  => (others => (others => Color_Id'First)));
+       Bitmap  => (others => (others => Color_Value'First)));
 
    type HBlank_Callback is access procedure
       (Y : Row);

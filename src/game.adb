@@ -40,7 +40,7 @@ package body Game is
       --  Clear dirty region
       for Y in Box.Bitmap'Range (1) loop
          for X in Box.Bitmap'Range (2) loop
-            Current.Bitmap (Box.Position.Y + Y, Box.Position.X + X) := Graphics.Color_Id'First;
+            Current.Bitmap (Box.Position.Y + Y, Box.Position.X + X) := Graphics.Color_Value'First;
          end loop;
       end loop;
 
@@ -64,7 +64,7 @@ package body Game is
       --  Copy the bitmap to the plane at the box position
       for Y in Box.Bitmap'Range (1) loop
          for X in Box.Bitmap'Range (2) loop
-            Current.Bitmap (Box.Position.Y + Y, Box.Position.X + X) := Color_Id (Box.Bitmap (Y, X));
+            Current.Bitmap (Box.Position.Y + Y, Box.Position.X + X) := Box.Bitmap (Y, X);
          end loop;
       end loop;
    end VBlank;
