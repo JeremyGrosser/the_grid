@@ -6,7 +6,6 @@
 with Bitmaps;
 
 package body Game is
-   use Graphics;
 
    type Coordinate is record
       Y : Integer;
@@ -24,12 +23,24 @@ package body Game is
 
    Velocity : Coordinate := (3, 5);
 
-   procedure VBlank is
+   procedure Initialize is
+   begin
+      Graphics.Initialize;
+      Graphics.VBlank := VBlank'Access;
+      Graphics.HBlank := HBlank'Access;
+      Graphics.Update;
+   end Initialize;
+
+   procedure Update renames Graphics.Update;
+
+   procedure VBlank
+      (N : Frame_Number)
+   is
    begin
       --  Clear dirty region
       for Y in Box.Bitmap'Range (1) loop
          for X in Box.Bitmap'Range (2) loop
-            Plane.Bitmap (Box.Position.Y + Y, Box.Position.X + X) := Graphics.Color_Id'First;
+            Current.Bitmap (Box.Position.Y + Y, Box.Position.X + X) := Graphics.Color_Id'First;
          end loop;
       end loop;
 
@@ -52,10 +63,12 @@ package body Game is
       --  Draw new box
       for Y in Box.Bitmap'Range (1) loop
          for X in Box.Bitmap'Range (2) loop
-            Plane.Bitmap (Box.Position.Y + Y, Box.Position.X + X) := Graphics.Color_Id (Box.Bitmap (Y, X));
+            Current.Bitmap (Box.Position.Y + Y, Box.Position.X + X) := Color_Id (Box.Bitmap (Y, X));
          end loop;
       end loop;
    end VBlank;
 
-   procedure HBlank is null;
+   procedure HBlank
+      (Y : Row)
+   is null;
 end Game;

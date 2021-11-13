@@ -9,6 +9,7 @@ package Graphics is
 
    subtype Row    is Integer range 1 .. Picosystem.Screen.Height;
    subtype Column is Integer range 1 .. Picosystem.Screen.Width;
+   type Frame_Number is mod 2 ** 32 - 1;
 
    subtype Color is Picosystem.Screen.Color;
 
@@ -20,6 +21,31 @@ package Graphics is
       Palette : Color_Palette;
       Bitmap  : Color_Map;
    end record;
+
+   Grayscale : constant Color_Palette :=
+      (Color'(0, 0, 0),
+       Color'(7, 15, 7),
+       Color'(15, 31, 15),
+       Color'(31, 63, 31));
+
+   Current : Plane :=
+      (Palette => Grayscale,
+       Bitmap  => (others => (others => Color_Id'First)));
+
+   Frame : Frame_Number := 0;
+
+   type HBlank_Callback is access procedure
+      (Y : Row);
+   type VBlank_Callback is access procedure
+      (N : Frame_Number);
+
+   HBlank : HBlank_Callback := null;
+   VBlank : VBlank_Callback := null;
+
+   procedure Initialize;
+   procedure Update;
+
+private
 
    function Scanline
       (This : Plane;

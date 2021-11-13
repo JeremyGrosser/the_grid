@@ -3,19 +3,16 @@
 --
 --  SPDX-License-Identifier: BSD-3-Clause
 --
-with Graphics;
+with Graphics; use Graphics;
 
 package Game is
-   Grayscale : constant Graphics.Color_Palette :=
-      (Graphics.Color'(0, 0, 0),
-       Graphics.Color'(7, 15, 7),
-       Graphics.Color'(15, 31, 15),
-       Graphics.Color'(31, 63, 31));
 
-   Plane : Graphics.Plane :=
-      (Palette => Grayscale,
-       Bitmap  => (others => (others => Graphics.Color_Id'First)));
+   procedure Initialize;
+   procedure Update;
 
-   procedure HBlank;
-   procedure VBlank;
+private
+
+   procedure HBlank (Y : Row);
+   procedure VBlank (N : Frame_Number);
+
 end Game;
