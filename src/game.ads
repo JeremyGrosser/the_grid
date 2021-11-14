@@ -3,16 +3,14 @@
 --
 --  SPDX-License-Identifier: BSD-3-Clause
 --
-with Graphics; use Graphics;
+with Graphics;
 
 package Game is
 
    procedure Initialize;
    procedure Update;
 
-private
-
-   procedure HBlank (Y : Row);
-   procedure VBlank (N : Frame_Number);
+   procedure HBlank (Y : Graphics.Row);
+   procedure VBlank (N : Graphics.Frame_Number);
 
 end Game;

@@ -23,24 +23,20 @@ package body Game is
 
    Velocity : Coordinate := (3, 5);
 
-   procedure Initialize is
-   begin
-      Graphics.Initialize;
-      Graphics.VBlank := VBlank'Access;
-      Graphics.HBlank := HBlank'Access;
-      Graphics.Update;
-   end Initialize;
+   procedure Initialize is null;
 
-   procedure Update renames Graphics.Update;
+   procedure Update is null;
 
    procedure VBlank
-      (N : Frame_Number)
+      (N : Graphics.Frame_Number)
    is
+      pragma Unreferenced (N);
+      use Graphics;
    begin
       --  Clear dirty region
       for Y in Box.Bitmap'Range (1) loop
          for X in Box.Bitmap'Range (2) loop
-            Current.Bitmap (Box.Position.Y + Y, Box.Position.X + X) := Graphics.Color_Value'First;
+            Current.Bitmap (Box.Position.Y + Y, Box.Position.X + X) := Color_Value'First;
          end loop;
       end loop;
 
@@ -70,6 +66,6 @@ package body Game is
    end VBlank;
 
    procedure HBlank
-      (Y : Row)
+      (Y : Graphics.Row)
    is null;
 end Game;
