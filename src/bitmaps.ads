@@ -18,4 +18,7 @@ package Bitmaps is
 
    X : aliased Bitmap
       with Import, External_Name => "_binary_x_bin_start";
+
+   Clear : aliased Bitmap :=
+      (others => (others => Graphics.Color_Value'First));
 end Bitmaps;

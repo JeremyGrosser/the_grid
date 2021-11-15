@@ -3,67 +3,72 @@
 --
 --  SPDX-License-Identifier: BSD-3-Clause
 --
-with Bitmaps;
+with Picosystem.Screen;
+with Random;
 
 package body Game is
 
-   type Coordinate is record
-      Y : Integer;
-      X : Integer;
-   end record;
+   function To_Screen_Coordinate
+      (Y : Grid_Row;
+       X : Grid_Column)
+      return Screen_Coordinate
+   is (Y => Graphics.Row'First + (Y - Grid_Row'First) * Bitmaps.Height,
+       X => Graphics.Column'First + (X - Grid_Column'First) * Bitmaps.Width);
 
    type Tile is record
-      Position : Coordinate;
-      Bitmap   : access Bitmaps.Bitmap;
+      Bitmap : Any_Bitmap;
+      Dirty  : Boolean;
    end record;
 
-   Box : Tile :=
-      (Position => (34, 93),
-       Bitmap   => Bitmaps.X'Access);
+   Grid : array (Grid_Row, Grid_Column) of Tile :=
+      (others => (others =>
+         (Dirty  => True,
+          Bitmap => Bitmaps.X'Access)));
 
-   Velocity : Coordinate := (3, 5);
+   procedure Blit
+      (Position : Screen_Coordinate;
+       B        : Any_Bitmap)
+   is
+   begin
+      for Y in B'Range (1) loop
+         for X in B'Range (2) loop
+            Graphics.Current.Bitmap
+               (Position.Y + Y - 1,
+                Position.X + X - 1)
+                := B.all (Y, X);
+         end loop;
+      end loop;
+   end Blit;
 
    procedure Initialize is null;
 
-   procedure Update is null;
+   procedure Update is
+      Y : Grid_Row;
+      X : Grid_Column;
+   begin
+      Y := Random.In_Range (Grid_Row'First, Grid_Row'Last);
+      X := Random.In_Range (Grid_Column'First, Grid_Column'Last);
+      Grid (Y, X).Bitmap := Bitmaps.Clear'Access;
+      Grid (Y, X).Dirty := True;
+
+      Y := Random.In_Range (Grid_Row'First, Grid_Row'Last);
+      X := Random.In_Range (Grid_Column'First, Grid_Column'Last);
+      Grid (Y, X).Bitmap := Bitmaps.X'Access;
+      Grid (Y, X).Dirty := True;
+
+      for GY in Grid'Range (1) loop
+         for GX in Grid'Range (2) loop
+            if Grid (GY, GX).Dirty then
+               Blit (To_Screen_Coordinate (GY, GX), Grid (GY, GX).Bitmap);
+               Grid (GY, GX).Dirty := False;
+            end if;
+         end loop;
+      end loop;
+   end Update;
 
    procedure VBlank
       (N : Graphics.Frame_Number)
-   is
-      pragma Unreferenced (N);
-      use Graphics;
-   begin
-      --  Clear dirty region
-      for Y in Box.Bitmap'Range (1) loop
-         for X in Box.Bitmap'Range (2) loop
-            Current.Bitmap (Box.Position.Y + Y, Box.Position.X + X) := Color_Value'First;
-         end loop;
-      end loop;
-
-      --  Invert velocity if we hit an edge
-      if (Box.Position.X + Bitmaps.Width + Velocity.X > Column'Last) or
-         (Box.Position.X + Velocity.X < Column'First)
-      then
-         Velocity.X := (-1) * Velocity.X;
-      end if;
-
-      if (Box.Position.Y + Bitmaps.Height + Velocity.Y > Row'Last) or
-         (Box.Position.Y + Velocity.Y < Row'First)
-      then
-         Velocity.Y := (-1) * Velocity.Y;
-      end if;
-
-      --  Update box position
-      Box.Position.X := Box.Position.X + Velocity.X;
-      Box.Position.Y := Box.Position.Y + Velocity.Y;
-
-      --  Copy the bitmap to the plane at the box position
-      for Y in Box.Bitmap'Range (1) loop
-         for X in Box.Bitmap'Range (2) loop
-            Current.Bitmap (Box.Position.Y + Y, Box.Position.X + X) := Box.Bitmap (Y, X);
-         end loop;
-      end loop;
-   end VBlank;
+   is null;
 
    procedure HBlank
       (Y : Graphics.Row)

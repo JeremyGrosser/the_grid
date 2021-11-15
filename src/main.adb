@@ -17,7 +17,7 @@ begin
 
    PS.LED.Initialize;
    PS.LED.Set_Color (16#00FF00#);
-   PS.LED.Set_Backlight ((PS.LED.Brightness'Last / 100) * 70);
+   PS.LED.Set_Backlight (0);
 
    Graphics.Initialize;
    Graphics.HBlank := Game.HBlank'Access;
@@ -26,9 +26,10 @@ begin
    Game.Initialize;
 
    PS.LED.Set_Color (16#000000#);
+   PS.LED.Set_Backlight ((PS.LED.Brightness'Last / 100) * 70);
 
    loop
-      Graphics.Update;
       Game.Update;
+      Graphics.Update;
    end loop;
 end Main;
