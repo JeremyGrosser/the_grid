@@ -23,7 +23,7 @@ package body Game is
    Grid : array (Grid_Row, Grid_Column) of Tile :=
       (others => (others =>
          (Dirty  => True,
-          Bitmap => Bitmaps.X'Access)));
+          Bitmap => Bitmaps.Clear'Access)));
 
    procedure Blit
       (Position : Screen_Coordinate;
