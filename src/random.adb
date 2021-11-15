@@ -9,14 +9,12 @@ package body Random is
    is
       Taps   : constant UInt16 := 16#B400#;
       LFSR   : UInt16 := State;
-      Period : UInt16 := 0;
       LSB    : UInt16;
    begin
       loop
          LSB := LFSR and 1;
          LFSR := Shift_Right (LFSR, 1);
          LFSR := LFSR xor ((-LSB) and Taps);
-         Period := Period + 1;
          exit when LFSR /= State;
       end loop;
       State := LFSR;
