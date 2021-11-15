@@ -3,7 +3,6 @@
 --
 --  SPDX-License-Identifier: BSD-3-Clause
 --
-with Picosystem.Screen;
 with Random;
 
 package body Game is
