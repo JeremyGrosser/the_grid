@@ -16,7 +16,7 @@ begin
    RP.Clock.Enable (RP.Clock.PERI);
 
    PS.LED.Initialize;
-   PS.LED.Set_Color (16#00FF00#);
+   PS.LED.Set_Color (16#008000#);
    PS.LED.Set_Backlight (0);
 
    Graphics.Initialize;
