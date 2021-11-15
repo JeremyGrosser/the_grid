@@ -16,7 +16,7 @@ package body Game is
        X => Graphics.Column'First + (X - Grid_Column'First) * Bitmaps.Width);
 
    type Tile is record
-      Bitmap : Any_Bitmap;
+      Bitmap : Bitmaps.Any_Bitmap;
       Dirty  : Boolean;
    end record;
 
@@ -27,7 +27,7 @@ package body Game is
 
    procedure Blit
       (Position : Screen_Coordinate;
-       B        : Any_Bitmap)
+       B        : Bitmaps.Any_Bitmap)
    is
    begin
       for Y in B'Range (1) loop

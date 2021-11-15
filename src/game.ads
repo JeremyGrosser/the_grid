@@ -16,8 +16,6 @@ package Game is
 
 private
 
-   type Any_Bitmap is not null access all Bitmaps.Bitmap;
-
    type Screen_Coordinate is record
       Y : Graphics.Row;
       X : Graphics.Column;
@@ -25,7 +23,7 @@ private
 
    procedure Blit
       (Position : Screen_Coordinate;
-       B        : Any_Bitmap);
+       B        : Bitmaps.Any_Bitmap);
 
    subtype Grid_Row is Integer range 1 .. (Graphics.Row'Last / Bitmaps.Height);
    subtype Grid_Column is Integer range 1 .. (Graphics.Column'Last / Bitmaps.Width);

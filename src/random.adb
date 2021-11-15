@@ -24,5 +24,5 @@ package body Random is
    function In_Range
       (First, Last : Natural)
       return Natural
-   is (First + (Natural (Next) mod Last));
+   is (First + (Natural (Next) mod (Last - First + 1)));
 end Random;
