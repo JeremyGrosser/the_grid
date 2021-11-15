@@ -7,9 +7,9 @@ package body Random is
    function Next
       return UInt16
    is
-      Taps   : constant UInt16 := 16#B400#;
-      LFSR   : UInt16 := State;
-      LSB    : UInt16;
+      Taps : constant UInt16 := 16#B400#;
+      LFSR : UInt16 := State;
+      LSB  : UInt16;
    begin
       loop
          LSB := LFSR and 1;
