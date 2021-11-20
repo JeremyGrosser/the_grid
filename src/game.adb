@@ -19,10 +19,10 @@ package body Game is
       Dirty  : Boolean;
    end record;
 
-   Grid : array (Grid_Row, Grid_Column) of Tile :=
-      (others => (others =>
-         (Dirty  => True,
-          Bitmap => Bitmaps.Clear'Access)));
+   type Tile_Grid is array (Grid_Row, Grid_Column) of Tile
+      with Pack;
+
+   Grid : Tile_Grid;
 
    procedure Blit
       (Position : Screen_Coordinate;
@@ -39,7 +39,13 @@ package body Game is
       end loop;
    end Blit;
 
-   procedure Initialize is null;
+   procedure Initialize is
+      Default_Tile : constant Tile :=
+         (Dirty => True,
+          Bitmap => Bitmaps.Blank'Access);
+   begin
+      Grid := (others => (others => Default_Tile));
+   end Initialize;
 
    procedure Update is
       Y : Grid_Row;
@@ -47,7 +53,7 @@ package body Game is
    begin
       Y := Random.In_Range (Grid_Row'First, Grid_Row'Last);
       X := Random.In_Range (Grid_Column'First, Grid_Column'Last);
-      Grid (Y, X).Bitmap := Bitmaps.Clear'Access;
+      Grid (Y, X).Bitmap := Bitmaps.Blank'Access;
       Grid (Y, X).Dirty := True;
 
       Y := Random.In_Range (Grid_Row'First, Grid_Row'Last);

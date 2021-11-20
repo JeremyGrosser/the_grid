@@ -16,7 +16,8 @@ package Graphics is
    type Color_Value is mod 4
       with Size => 2;
    type Color_Palette is array (Color_Value) of Color;
-   type Color_Map is array (Row, Column) of Color_Value;
+   type Color_Map is array (Row, Column) of Color_Value
+      with Pack;
 
    type Plane is record
       Palette : Color_Palette;

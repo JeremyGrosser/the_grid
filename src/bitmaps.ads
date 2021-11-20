@@ -15,11 +15,11 @@ package Bitmaps is
    --  Graphics.Color_Palette.
    type Bitmap is array (1 .. Height, 1 .. Width) of Graphics.Color_Value
       with Component_Size => Graphics.Color_Value'Size;
-   type Any_Bitmap is not null access all Bitmap;
+   type Any_Bitmap is access all Bitmap;
 
    X : aliased Bitmap
       with Import, External_Name => "_binary_x_bin_start";
 
-   Clear : aliased Bitmap :=
-      (others => (others => Graphics.Color_Value'First));
+   Blank : aliased Bitmap
+      with Import, External_Name => "_binary_blank_bin_start";
 end Bitmaps;
