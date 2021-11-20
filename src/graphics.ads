@@ -30,9 +30,7 @@ package Graphics is
        Color'(15, 31, 15),
        Color'(31, 63, 31));
 
-   Current : Plane :=
-      (Palette => Grayscale,
-       Bitmap  => (others => (others => Color_Value'First)));
+   Current : Plane;
 
    type HBlank_Callback is access procedure
       (Y : Row);

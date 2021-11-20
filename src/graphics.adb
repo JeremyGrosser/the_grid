@@ -8,7 +8,15 @@ package body Graphics is
    Buffers      : array (Buffer_Index) of aliased Picosystem.Screen.Scanline;
    Swap         : Buffer_Index := Buffer_Index'First;
 
-   procedure Initialize renames Picosystem.Screen.Initialize;
+   procedure Initialize is
+      Default_Color : constant Color_Value := Color_Value'First;
+   begin
+      Picosystem.Screen.Initialize;
+      Current :=
+         (Palette => Grayscale,
+          Bitmap  => (others => (others => Default_Color)));
+      Update;
+   end Initialize;
 
    function Scanline
       (This : Plane;
