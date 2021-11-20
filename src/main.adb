@@ -30,6 +30,5 @@ begin
 
    loop
       Graphics.Update;
-      Game.Update;
    end loop;
 end Main;

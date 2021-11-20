@@ -9,7 +9,6 @@ with Bitmaps;
 package Game is
 
    procedure Initialize;
-   procedure Update;
 
    procedure HBlank (Y : Graphics.Row);
    procedure VBlank (N : Graphics.Frame_Number);

@@ -47,35 +47,36 @@ package body Game is
       Grid := (others => (others => Default_Tile));
    end Initialize;
 
-   procedure Update is
-      Y : Grid_Row;
-      X : Grid_Column;
+   procedure VBlank
+      (N : Graphics.Frame_Number)
+   is
+      GY : Grid_Row;
+      GX : Grid_Column;
    begin
-      Y := Random.In_Range (Grid_Row'First, Grid_Row'Last);
-      X := Random.In_Range (Grid_Column'First, Grid_Column'Last);
-      Grid (Y, X).Bitmap := Bitmaps.Blank'Access;
-      Grid (Y, X).Dirty := True;
+      for I in 1 .. 64 loop
+         GY := Random.In_Range (Grid_Row'First, Grid_Row'Last);
+         GX := Random.In_Range (Grid_Column'First, Grid_Column'Last);
+         Grid (GY, GX).Bitmap := Bitmaps.Blank'Access;
+         Grid (GY, GX).Dirty := True;
 
-      Y := Random.In_Range (Grid_Row'First, Grid_Row'Last);
-      X := Random.In_Range (Grid_Column'First, Grid_Column'Last);
-      Grid (Y, X).Bitmap := Bitmaps.X'Access;
-      Grid (Y, X).Dirty := True;
+         GY := Random.In_Range (Grid_Row'First, Grid_Row'Last);
+         GX := Random.In_Range (Grid_Column'First, Grid_Column'Last);
+         Grid (GY, GX).Bitmap := Bitmaps.X'Access;
+         Grid (GY, GX).Dirty := True;
+      end loop;
 
-      for GY in Grid'Range (1) loop
-         for GX in Grid'Range (2) loop
-            if Grid (GY, GX).Dirty then
-               Blit (To_Screen_Coordinate (GY, GX), Grid (GY, GX).Bitmap);
-               Grid (GY, GX).Dirty := False;
+      for Y in Grid'Range (1) loop
+         for X in Grid'Range (2) loop
+            if Grid (Y, X).Dirty then
+               Blit (To_Screen_Coordinate (Y, X), Grid (Y, X).Bitmap);
+               Grid (Y, X).Dirty := False;
             end if;
          end loop;
       end loop;
-   end Update;
-
-   procedure VBlank
-      (N : Graphics.Frame_Number)
-   is null;
+   end VBlank;
 
    procedure HBlank
       (Y : Graphics.Row)
    is null;
+
 end Game;
