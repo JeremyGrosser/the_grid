@@ -26,7 +26,7 @@ package body Game is
 
    procedure Blit
       (Position : Screen_Coordinate;
-       B        : Bitmaps.Any_Bitmap)
+       B        : not null Bitmaps.Any_Bitmap)
    is
    begin
       for Y in B'Range (1) loop

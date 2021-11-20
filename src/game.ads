@@ -22,7 +22,7 @@ private
 
    procedure Blit
       (Position : Screen_Coordinate;
-       B        : Bitmaps.Any_Bitmap);
+       B        : not null Bitmaps.Any_Bitmap);
 
    subtype Grid_Row is Integer range 1 .. (Graphics.Row'Last / Bitmaps.Height);
    subtype Grid_Column is Integer range 1 .. (Graphics.Column'Last / Bitmaps.Width);
