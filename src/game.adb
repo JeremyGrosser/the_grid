@@ -4,6 +4,7 @@
 --  SPDX-License-Identifier: BSD-3-Clause
 --
 with Random;
+with Sound;
 
 package body Game is
 
@@ -50,10 +51,18 @@ package body Game is
    procedure VBlank
       (N : Graphics.Frame_Number)
    is
+      use type Graphics.Frame_Number;
       GY : Grid_Row;
       GX : Grid_Column;
    begin
-      for I in 1 .. 64 loop
+      if N <= 30 and N mod 10 = 0 then
+         Sound.Play
+            (Note   => Sound.A,
+             Octave => 4,
+             Length => 50);
+      end if;
+
+      for I in 1 .. 4 loop
          GY := Random.In_Range (Grid_Row'First, Grid_Row'Last);
          GX := Random.In_Range (Grid_Column'First, Grid_Column'Last);
          Grid (GY, GX).Bitmap := Bitmaps.Blank'Access;
@@ -77,6 +86,12 @@ package body Game is
 
    procedure HBlank
       (Y : Graphics.Row)
-   is null;
+   is
+      use type Graphics.Row;
+   begin
+      if Y mod 2 = 0 then
+         Sound.Update;
+      end if;
+   end HBlank;
 
 end Game;

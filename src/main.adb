@@ -6,6 +6,7 @@
 with Picosystem.LED;
 with RP.Clock;
 with Graphics;
+with Sound;
 with Game;
 
 procedure Main is
@@ -19,6 +20,7 @@ begin
    PS.LED.Set_Color (16#008000#);
    PS.LED.Set_Backlight (0);
 
+   Sound.Initialize;
    Graphics.Initialize;
 
    Game.Initialize;
