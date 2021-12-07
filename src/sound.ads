@@ -4,7 +4,7 @@ package Sound is
 
    type Octaves is range 0 .. 11;
    type Notes is (C, Cs, D, Ds, E, F, Fs, G, Gs, A, As, B);
-   subtype Milliseconds is Positive;
+   subtype Milliseconds is Natural;
 
    procedure Initialize;
    procedure Update;
@@ -13,6 +13,7 @@ package Sound is
       (Note   : Notes;
        Octave : Octaves;
        Length : Milliseconds);
+   --  Length = 0 will play until Stop or Play are called.
 
    function Is_Playing
       return Boolean;

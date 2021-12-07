@@ -3,6 +3,8 @@ with RP.Clock;
 with RP.Timer;
 with RP.GPIO;
 
+with Picosystem.LED;
+
 package body Sound is
    use RP.Timer;
    use RP.PWM;
@@ -28,6 +30,12 @@ package body Sound is
 
    procedure Update is
    begin
+      if Playing then
+         Picosystem.LED.Set_Color (16#FF0000#);
+      else
+         Picosystem.LED.Set_Color (16#00FF00#);
+      end if;
+
       if Playing and then Clock >= Stop_At then
          Stop;
       end if;
@@ -49,7 +57,11 @@ package body Sound is
       Set_Divider (P.Slice, Div);
       Set_Interval (P.Slice, Interval);
       Set_Duty_Cycle (P.Slice, P.Channel, Interval / 1000); -- TODO volume control?
-      Stop_At := Clock + RP.Timer.Milliseconds (Length);
+      if Length = 0 then
+         Stop_At := Time'Last;
+      else
+         Stop_At := Clock + RP.Timer.Milliseconds (Length);
+      end if;
       Playing := True;
    end Play;
 

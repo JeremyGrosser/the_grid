@@ -8,6 +8,7 @@ with RP.Clock;
 with Graphics;
 with Sound;
 with Game;
+with MIDI;
 
 procedure Main is
    package PS renames Picosystem;
@@ -22,15 +23,17 @@ begin
 
    Sound.Initialize;
    Graphics.Initialize;
+   MIDI.Initialize;
 
    Game.Initialize;
    Graphics.HBlank := Game.HBlank'Access;
    Graphics.VBlank := Game.VBlank'Access;
 
-   PS.LED.Set_Color (16#000000#);
-   PS.LED.Set_Backlight ((PS.LED.Brightness'Last / 100) * 70);
+   --  PS.LED.Set_Color (16#000000#);
+   --  PS.LED.Set_Backlight ((PS.LED.Brightness'Last / 100) * 70);
 
    loop
-      Graphics.Update;
+      --  Graphics.Update;
+      MIDI.Update;
    end loop;
 end Main;
