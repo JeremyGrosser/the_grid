@@ -63,6 +63,8 @@ package body MIDI is
       Bend             at 2 range 0 .. 7;
    end record;
 
+   Current_Key : MIDI_Key := MIDI_Key'First;
+
    function To_Message is new Ada.Unchecked_Conversion
       (Source => USB.Device.MIDI.MIDI_Event,
        Target => Message);
@@ -90,6 +92,7 @@ package body MIDI is
    end Initialize;
 
    procedure Update is
+      use HAL;
       Event : USB.Device.MIDI.MIDI_Event;
       M     : Message;
    begin
@@ -99,6 +102,7 @@ package body MIDI is
          M := To_Message (Event);
          case M.Kind is
             when Note_On =>
+               Current_Key := M.Key;
                declare
                   Note   : constant Sound.Notes := Sound.Notes'Val (Natural (M.Key) mod 12);
                   Octave : constant Sound.Octaves := Sound.Octaves
@@ -107,7 +111,9 @@ package body MIDI is
                   Sound.Play (Note, Octave, 0);
                end;
             when Note_Off =>
-               Sound.Stop;
+               if M.Key = Current_Key then
+                  Sound.Stop;
+               end if;
             when others =>
                null;
          end case;

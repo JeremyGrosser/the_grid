@@ -29,6 +29,8 @@ USB_EMBEDDED_COMPILE_CHECKS = "disabled"
 USB_EMBEDDED_CONTRACTS = "disabled"
 USB_EMBEDDED_RUNTIME_CHECKS = "disabled"
 
+BARE_RUNTIME_SWITCHES = "-mcpu=cortex-m0plus"
+
 [[depends-on]]  # Added by alr
 picosystem_bsp = "~0.1.0"  # Added by alr
 synack_misc = "0"
@@ -36,3 +38,7 @@ synack_misc = "0"
 [[pins]]
 picosystem_bsp = { url='https://github.com/JeremyGrosser/picosystem_bsp' }
 synack_misc = { url='https://github.com/JeremyGrosser/synack_misc' }
+[[depends-on]]  # Added by alr
+bare_runtime = "~0.1.0"  # Added by alr
+[[pins]]  # Added by alr
+bare_runtime = { url='https://github.com/Fabien-Chouteau/bare_runtime' }   # Added by alr

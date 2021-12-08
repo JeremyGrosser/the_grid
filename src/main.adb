@@ -5,10 +5,12 @@
 --
 with Picosystem.LED;
 with RP.Clock;
+with Console;
 with Graphics;
 with Sound;
 with Game;
 with MIDI;
+with Ada.Text_IO;
 
 procedure Main is
    package PS renames Picosystem;
@@ -16,6 +18,10 @@ procedure Main is
 begin
    RP.Clock.Initialize (PS.XOSC_Frequency);
    RP.Clock.Enable (RP.Clock.PERI);
+
+   Console.Initialize;
+   Ada.Text_IO.New_Line;
+   Ada.Text_IO.Put_Line ("picosystem");
 
    PS.LED.Initialize;
    PS.LED.Set_Color (16#008000#);
