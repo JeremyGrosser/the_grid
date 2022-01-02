@@ -25,11 +25,14 @@ SYNACK_MISC_CONTRACTS = "enabled"
 SYNACK_MISC_RUNTIME_CHECKS = "enabled"
 
 USB_EMBEDDED_BUILD_MODE = "optimize"
-USB_EMBEDDED_COMPILE_CHECKS = "disabled"
-USB_EMBEDDED_CONTRACTS = "disabled"
-USB_EMBEDDED_RUNTIME_CHECKS = "disabled"
+USB_EMBEDDED_COMPILE_CHECKS = "enabled"
+USB_EMBEDDED_CONTRACTS = "enabled"
+USB_EMBEDDED_RUNTIME_CHECKS = "enabled"
 
-BARE_RUNTIME_SWITCHES = "-mcpu=cortex-m0plus"
+#BARE_RUNTIME_SWITCHES = "-mcpu=cortex-m0plus"
+
+[configuration.values]
+rp2040_hal.Use_Startup = false
 
 [[depends-on]]  # Added by alr
 picosystem_bsp = "~0.1.0"  # Added by alr
@@ -39,6 +42,6 @@ synack_misc = "0"
 picosystem_bsp = { url='https://github.com/JeremyGrosser/picosystem_bsp' }
 synack_misc = { url='https://github.com/JeremyGrosser/synack_misc' }
 [[depends-on]]  # Added by alr
-bare_runtime = "~0.1.0"  # Added by alr
+ravenscar_full_rp2040 = "~0.1.0"  # Added by alr
 [[pins]]  # Added by alr
-bare_runtime = { url='https://github.com/Fabien-Chouteau/bare_runtime' }   # Added by alr
+ravenscar_full_rp2040 = { path='../ravenscar_full_rp2040' }

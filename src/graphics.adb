@@ -15,7 +15,6 @@ package body Graphics is
       Current :=
          (Palette => Grayscale,
           Bitmap  => (others => (others => Default_Color)));
-      Update;
    end Initialize;
 
    function Scanline
@@ -49,5 +48,13 @@ package body Graphics is
 
       Frame := Frame + 1;
    end Update;
+
+   task body Run is
+   begin
+      Initialize;
+      loop
+         Update;
+      end loop;
+   end Run;
 
 end Graphics;

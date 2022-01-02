@@ -1,12 +1,12 @@
 with "config/the_grid_config.gpr";
 with "picosystem_bsp.gpr";
 with "resources.gpr";
-with "bare_runtime.gpr";
+with "ravenscar_build.gpr";
 
 project The_Grid is
 
    for Target use "arm-eabi";
-   for Runtime ("Ada") use Bare_Runtime'Runtime ("Ada");
+   for Runtime ("Ada") use Ravenscar_Build'Runtime ("Ada");
 
    for Source_Dirs use ("src");
    for Object_Dir use "obj";
@@ -38,12 +38,9 @@ project The_Grid is
    end Binder;
 
    package Linker is
-      for Switches ("Ada") use Picosystem_BSP.Linker_Switches & (
-         "-Wl,-print-memory-usage",
-         "-Wl,-Map=main.map",
-         "-Wl,-gc-sections"
-      );
+      for Switches ("Ada") use
+         ("-Wl,-print-memory-usage",
+          "-Wl,-gc-sections");
    end Linker;
-
 
 end The_Grid;

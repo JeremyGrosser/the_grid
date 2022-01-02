@@ -71,4 +71,12 @@ package body Sound is
       Playing := False;
    end Stop;
 
+   task body Run is
+   begin
+      Initialize;
+      loop
+         Update;
+      end loop;
+   end Run;
+
 end Sound;

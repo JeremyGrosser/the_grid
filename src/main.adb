@@ -27,10 +27,6 @@ begin
    PS.LED.Set_Color (16#008000#);
    PS.LED.Set_Backlight (0);
 
-   Sound.Initialize;
-   Graphics.Initialize;
-   MIDI.Initialize;
-
    Game.Initialize;
    Graphics.HBlank := Game.HBlank'Access;
    Graphics.VBlank := Game.VBlank'Access;
@@ -39,7 +35,6 @@ begin
    --  PS.LED.Set_Backlight ((PS.LED.Brightness'Last / 100) * 70);
 
    loop
-      --  Graphics.Update;
-      MIDI.Update;
+      delay 0.1;
    end loop;
 end Main;

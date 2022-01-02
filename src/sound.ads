@@ -6,9 +6,6 @@ package Sound is
    type Notes is (C, Cs, D, Ds, E, F, Fs, G, Gs, A, As, B);
    subtype Milliseconds is Natural;
 
-   procedure Initialize;
-   procedure Update;
-
    procedure Play
       (Note   : Notes;
        Octave : Octaves;
@@ -36,5 +33,9 @@ private
       10     => (3551, 3351, 3163, 2986, 2818, 2660, 2511, 2370, 2237, 2111, 1993, 1881),
       11     => (1869, 1764, 1665, 1571, 1483, 1400, 1321, 1247, 1177, 1111, 1048, 990)
    );
+
+   procedure Initialize;
+   procedure Update;
+   task Run;
 
 end Sound;

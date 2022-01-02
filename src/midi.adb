@@ -118,7 +118,13 @@ package body MIDI is
                null;
          end case;
       end if;
-
-      Sound.Update;
    end Update;
+
+   task body Run is
+   begin
+      Initialize;
+      loop
+         Update;
+      end loop;
+   end Run;
 end MIDI;

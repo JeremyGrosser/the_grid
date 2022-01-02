@@ -5,7 +5,9 @@
 --
 with Picosystem.Screen;
 
-package Graphics is
+package Graphics
+   with Elaborate_Body
+is
 
    subtype Row    is Integer range 1 .. Picosystem.Screen.Height;
    subtype Column is Integer range 1 .. Picosystem.Screen.Width;
@@ -40,9 +42,6 @@ package Graphics is
    HBlank : HBlank_Callback := null;
    VBlank : VBlank_Callback := null;
 
-   procedure Initialize;
-   procedure Update;
-
 private
 
    Frame : Frame_Number := 0;
@@ -51,5 +50,9 @@ private
       (This : Plane;
        Y    : Row)
        return Picosystem.Screen.Scanline;
+
+   procedure Initialize;
+   procedure Update;
+   task Run;
 
 end Graphics;

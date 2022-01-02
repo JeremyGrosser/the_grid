@@ -87,11 +87,8 @@ package body Game is
    procedure HBlank
       (Y : Graphics.Row)
    is
-      use type Graphics.Row;
    begin
-      if Y mod 2 = 0 then
-         Sound.Update;
-      end if;
+      null;
    end HBlank;
 
 end Game;
