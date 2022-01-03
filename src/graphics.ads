@@ -21,11 +21,6 @@ is
    type Color_Map is array (Row, Column) of Palette_Index
       with Pack;
 
-   type Plane is record
-      Palette : Color_Palette;
-      Bitmap  : Color_Map;
-   end record;
-
    Grayscale : constant Color_Palette :=
       (Color'(0, 0, 0),
        Color'(7, 15, 7),
