@@ -32,10 +32,10 @@ package body Game is
    begin
       for Y in B'Range (1) loop
          for X in B'Range (2) loop
-            Graphics.Current.Bitmap
+            Graphics.Current.Set_Pixel
                (Position.Y + Y - 1,
-                Position.X + X - 1)
-                := B.all (Y, X);
+                Position.X + X - 1,
+                B.all (Y, X));
          end loop;
       end loop;
    end Blit;

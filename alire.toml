@@ -45,3 +45,5 @@ synack_misc = { url='https://github.com/JeremyGrosser/synack_misc' }
 ravenscar_full_rp2040 = "~0.1.0"  # Added by alr
 [[pins]]  # Added by alr
 ravenscar_full_rp2040 = { path='../ravenscar_full_rp2040' }
+[[pins]]  # Added by alr
+rp2040_hal = { path='../rp2040_hal' }   # Added by alr

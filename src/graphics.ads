@@ -15,10 +15,10 @@ is
 
    subtype Color is Picosystem.Screen.Color;
 
-   type Color_Value is mod 4
+   type Palette_Index is mod 4
       with Size => 2;
-   type Color_Palette is array (Color_Value) of Color;
-   type Color_Map is array (Row, Column) of Color_Value
+   type Color_Palette is array (Palette_Index) of Color;
+   type Color_Map is array (Row, Column) of Palette_Index
       with Pack;
 
    type Plane is record
@@ -32,7 +32,29 @@ is
        Color'(15, 31, 15),
        Color'(31, 63, 31));
 
-   Current : Plane;
+   protected type Shared_Plane is
+
+      procedure Set_Palette
+         (P : Color_Palette);
+
+      procedure Set_Pixel
+         (Y : Row;
+          X : Column;
+          V : Palette_Index);
+
+      function Get_Pixel
+         (Y : Row;
+          X : Column)
+          return Color;
+
+      procedure Clear;
+
+   private
+      Palette : Color_Palette;
+      Bitmap  : Color_Map;
+   end Shared_Plane;
+
+   Current : Shared_Plane;
 
    type HBlank_Callback is access procedure
       (Y : Row);
@@ -47,7 +69,7 @@ private
    Frame : Frame_Number := 0;
 
    function Scanline
-      (This : Plane;
+      (This : Shared_Plane;
        Y    : Row)
        return Picosystem.Screen.Scanline;
 

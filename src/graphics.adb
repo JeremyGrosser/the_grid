@@ -8,24 +8,52 @@ package body Graphics is
    Buffers      : array (Buffer_Index) of aliased Picosystem.Screen.Scanline;
    Swap         : Buffer_Index := Buffer_Index'First;
 
+   protected body Shared_Plane is
+      procedure Set_Palette
+         (P : Color_Palette)
+      is
+      begin
+         Palette := P;
+      end Set_Palette;
+
+      procedure Set_Pixel
+         (Y : Row;
+          X : Column;
+          V : Palette_Index)
+      is
+      begin
+         Bitmap (Y, X) := V;
+      end Set_Pixel;
+
+      function Get_Pixel
+         (Y : Row;
+          X : Column)
+          return Color
+      is (Palette (Bitmap (Y, X)));
+
+      procedure Clear is
+         Default_Color : constant Palette_Index := Palette_Index'First;
+      begin
+         Bitmap := (others => (others => Default_Color));
+      end Clear;
+   end Shared_Plane;
+
    procedure Initialize is
-      Default_Color : constant Color_Value := Color_Value'First;
    begin
       Picosystem.Screen.Initialize;
-      Current :=
-         (Palette => Grayscale,
-          Bitmap  => (others => (others => Default_Color)));
+      Current.Set_Palette (Grayscale);
+      Current.Clear;
    end Initialize;
 
    function Scanline
-      (This : Plane;
+      (This : Shared_Plane;
        Y    : Row)
       return Picosystem.Screen.Scanline
    is
       Line : Picosystem.Screen.Scanline;
    begin
       for X in Column'Range loop
-         Line (X) := This.Palette (This.Bitmap (Y, X));
+         Line (X) := This.Get_Pixel (Y, X);
       end loop;
       return Line;
    end Scanline;

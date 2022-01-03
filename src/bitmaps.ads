@@ -13,8 +13,8 @@ package Bitmaps is
    --  All bitmaps are stored as row-major, 2-bit per pixel color value. The
    --  actual display color is determined by a lookup from this value into a
    --  Graphics.Color_Palette.
-   type Bitmap is array (1 .. Height, 1 .. Width) of Graphics.Color_Value
-      with Component_Size => Graphics.Color_Value'Size;
+   type Bitmap is array (1 .. Height, 1 .. Width) of Graphics.Palette_Index
+      with Component_Size => Graphics.Palette_Index'Size;
    type Any_Bitmap is access all Bitmap;
 
    X : aliased Bitmap
